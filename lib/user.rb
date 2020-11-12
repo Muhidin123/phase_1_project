@@ -1,4 +1,5 @@
 require 'tty-prompt'
+require 'colorize'
 
 class User < ActiveRecord::Base
     has_many :user_trips
@@ -8,7 +9,7 @@ class User < ActiveRecord::Base
         system "clear"
         prompt = TTY::Prompt.new
         user_input = prompt.select("What's your status?",
-          %w(New_User Current_User))
+          %w(New_User Existing_User))
         if user_input == "New_User"
           self.create_new_user
         else
@@ -43,11 +44,10 @@ class User < ActiveRecord::Base
         password = prompt.mask("Please enter password:")
         current_user = User.find_by(user_name: user_name)
         if User.all.map { |user| user.user_name }.include?(user_name) && current_user.password == password
-          puts "Welcome back, #{current_user.name}!"
+          puts "Welcome back, #{current_user.name}!".green.italic
         else
-          puts "Password or username was inncoret pls try again:"
+          puts "Password and/or username is incorrect please try again:".red.underline
           find_existing_user
         end
       end
 end
-

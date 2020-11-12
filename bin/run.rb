@@ -1,3 +1,7 @@
 require_relative '../config/environment'
+def prompt
+    TTY::Prompt.new
+end
 
-User.setup_user
+user = CliCom.new
+user.welcome

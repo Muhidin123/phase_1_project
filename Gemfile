@@ -7,3 +7,5 @@ gem "pry"
 gem "require_all"
 gem "rest-client"
 gem 'tty'
+gem 'colorize'
+gem 'tty-font'
