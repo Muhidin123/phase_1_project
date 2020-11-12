@@ -37,7 +37,6 @@ class User < ActiveRecord::Base
         end
 
       def self.find_existing_user
-        counter = 2
         puts "Please enter username:"
         user_name = gets.chomp
         prompt = TTY::Prompt.new
@@ -50,4 +49,18 @@ class User < ActiveRecord::Base
           find_existing_user
         end
       end
+
+
+      def self.all_user_trips
+        UserTrip.all.select {|trips| trips.user_id == self.id}
+        #binding.pry
+      end
+
+
+      def self.user_cities_by_name
+        self.all_user_trips.map do |city| 
+          city.name
+        end
+      end
+
 end
