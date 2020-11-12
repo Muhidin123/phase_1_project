@@ -1,6 +1,6 @@
 class AddNewTableCitys < ActiveRecord::Migration[5.2]
   def change
-    create_table :citys do |t|
+    create_table :cities do |t|
       t.string :name
       t.string :state
       t.integer :population

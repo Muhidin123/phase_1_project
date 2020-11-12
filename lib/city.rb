@@ -22,8 +22,6 @@ class City < ActiveRecord::Base
     def self.find_by_name
         var = prompt.ask("Search by city name if it's in my database I'll give you info: ")
         pp result = City.where('name like?', "%#{var}%")
-        #binding.pry
-        #pp result
     end
 
 
@@ -31,5 +29,7 @@ class City < ActiveRecord::Base
         input = prompt.select("Enter avg temp u want:", %w(78F 66F))
         pp City.find_by(average_temp: input)
     end
+
+
 
 end
