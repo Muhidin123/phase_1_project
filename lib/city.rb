@@ -8,13 +8,13 @@ class City < ActiveRecord::Base
     def prompt
         TTY::Prompt.new
     end
-
+ 
     def self.display_all_city_names
         test = self.all.map do |city|
             city.name
             #binding.pry
         end
-        input = prompt.select("Chose your city", test)
+        input = prompt.select("Choose your city", test)
         pp City.find_by(name: input)
         #binding.pry
     end

@@ -4,4 +4,4 @@ def prompt
 end
 
 user = CliCom.new
-user.welcome
+user.welcome 

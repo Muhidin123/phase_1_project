@@ -6,8 +6,10 @@ class AddNewTableCitys < ActiveRecord::Migration[5.2]
       t.integer :population
       t.integer :area
       t.string :average_temp
-      t.text :neighborhood
       t.text :eat_drink
+      t.text :restaurant
+      t.text :landmark
+      t.text :activity
 
 
       t.timestamps

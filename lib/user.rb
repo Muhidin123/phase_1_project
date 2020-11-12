@@ -1,6 +1,6 @@
 require 'tty-prompt'
 require 'colorize'
-
+ 
 class User < ActiveRecord::Base
     has_many :user_trips
     has_many :cities, through: :user_trips
@@ -37,7 +37,6 @@ class User < ActiveRecord::Base
         end
 
       def self.find_existing_user
-        counter = 2
         puts "Please enter username:"
         user_name = gets.chomp
         prompt = TTY::Prompt.new
