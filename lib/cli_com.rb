@@ -14,58 +14,61 @@ class CliCom
         prompt = TTY::Prompt.new
     end
     
-    def welcome
-        font = TTY::Font.new(:starwars)
-        puts font.write("Welcome to this APP", letter_spacing: 1)
-        sleep(5)
-        system 'clear'
+    def self.welcome
+        #font = TTY::Font.new(:starwars)
+        #puts font.write("Welcome to this APP", letter_spacing: 1)
+        #sleep(5)
+        #system 'clear'
         User.setup_user
         sleep(3)
         system 'clear'
+        #UserTrip.display_user_cities_as_menu
+        #UserTrip.find_and_delete
         menu
-        # system 'clear'
-        # menu_user_after_picking_city
+        
+        sleep(2)
     end
     
     
-    def user_input
-        case $answer
+    def self.user_input
+        case $user
         when "All cities"
             all_cities = City.display_all_city_names
             binding.pry
         when "Search by city name"
-            City.find_by_name
+            @city = City.find_by_name
+            binding.pry
         when "Search by city climate"
-            City.find_by_climate
+            #binding.pry
+            @city = City.find_by_climate
+        when "Check all the cities you have"
+            City.display_cities_of_user
         when "EXIT"
-            good_bye
-
+             puts "We are so sorry to see you go :( until next time".red.italic
+             exit
         end
     end
     
-    def menu
-        main_menu = ["All cities", "Search by city name","Search by city climate", "EXIT"]
-        $answer = prompt.select("Choose,KEEP IN MIND, IF YOU SELECT ALL CITIES LIST IS LONG", main_menu)
-        $answer
+    def self.menu
+        main_menu = ["All cities", "Search by city name","Search by city climate", "Check all the cities you have", "EXIT"]
+        $user = prompt.select("Choose,KEEP IN MIND, IF YOU SELECT ALL CITIES LIST IS LONG", main_menu)
         user_input
     end
-    
-    def good_bye
-        puts "We are so sorry to see you go :( until next time".red.italic
-        exit
-    end
 
-    def menu_user_after_picking_city
-        main_menu = ["Back to main menu", "Save this city to search history","EXIT"]
-        $answer = prompt.select("What would you like to do next", main_menu)
-        case $answer
+
+    def self.menu_user_after_picking_city
+        main_menu = ["Back to main menu", "Save this city to trip history", "EXIT"]
+        @answer = prompt.select("What would you like to do next", main_menu)
+        case @answer
         when "Back to main menu"
             menu
-        when "Save this city to search history"
-            good_bye
+        when "Save this city to trip history"
+            UserTrip.new_trip
         when "EXIT"
-            good_bye
+            puts "We are so sorry to see you go :( until next time".red.italic
+            exit
         end
+        menu
     end
 
     def self.delete_city
@@ -85,38 +88,9 @@ class CliCom
         
         user_city_ids = user_trip.map do |trip|
             trip.city_id 
-
         end
+
         found_city_ids = City.find(user_city_ids)
         binding.pry
-      end
-
-        
-
-          #This user's all trip
-      #all the cities
-      #select the city
-      #save this user id
-
-
-      #find the city
-      #go through the joiner
-      #match the user to that city 
-      #save this city id
-      #delete this city
-
-           # def self.new_trip
-      #   city_id = Clicom.user_input.all_cities.map do |city|
-      #     city.id
-      #   end
-          
-      #     User.all.map do |user| 
-      #       if user == self
-      #         urser_id = user.id
-      #         UserTrip.create(user_id: user_id, city_id: city_id)
-      #       end
-      #     end
-
-
+    end
 end
-
