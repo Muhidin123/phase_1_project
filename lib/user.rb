@@ -27,13 +27,14 @@ class User < ActiveRecord::Base
           password = key(:password).ask("And a new password please: ")
           end
           if User.find_by(user_name: result[:user_name])
+            binding.pry
             puts "Username already taken"
             create_new_user
           else
-            current_user = User.create(result)
-            puts "New user created! Welcome, #{current_user.name}!"
+            $new_user = User.create(result)
+            puts "New user created! Welcome, #{$new_user.name}!"
           end
-          current_user
+          $new_user
         end
 
       def self.find_existing_user
@@ -41,9 +42,9 @@ class User < ActiveRecord::Base
         user_name = gets.chomp
         prompt = TTY::Prompt.new
         password = prompt.mask("Please enter password:")
-        current_user = User.find_by(user_name: user_name)
-        if User.all.map { |user| user.user_name }.include?(user_name) && current_user.password == password
-          puts "Welcome back, #{current_user.name}!".green.italic
+        $current_existing_user = User.find_by(user_name: user_name)
+        if User.all.map { |user| user.user_name }.include?(user_name) && $current_existing_user.password == password
+          puts "Welcome back, #{$current_existing_user.name}!".green.italic
         else
           puts "Password and/or username is incorrect please try again:".red.underline
           find_existing_user
@@ -51,15 +52,11 @@ class User < ActiveRecord::Base
       end
 
 
-      def self.all_user_trips
-        UserTrip.all.select {|trips| trips.user_id == self.id}
-        #binding.pry
-      end
-
-
-      def self.user_cities_by_name
-        self.all_user_trips.map do |city| 
-          city.name
+      def self.current_user
+        if $current_existing_user
+          $current_existing_user
+        else
+          $new_user
         end
       end
 

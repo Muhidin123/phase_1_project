@@ -3,5 +3,5 @@ def prompt
     TTY::Prompt.new
 end
 
-user = CliCom.new
-user.welcome
+
+CliCom.welcome
