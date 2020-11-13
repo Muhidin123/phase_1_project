@@ -15,14 +15,17 @@ class CliCom
     end
     
     def self.welcome
-        font = TTY::Font.new(:starwars)
-        puts font.write("Welcome to this APP", letter_spacing: 1)
-        sleep(5)
-        system 'clear'
+        #font = TTY::Font.new(:starwars)
+        #puts font.write("Welcome to this APP", letter_spacing: 1)
+        #sleep(5)
+        #system 'clear'
         User.setup_user
         sleep(3)
         system 'clear'
+        #UserTrip.display_user_cities_as_menu
+        #UserTrip.find_and_delete
         menu
+        
         sleep(2)
     end
     

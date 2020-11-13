@@ -48,8 +48,8 @@ class City < ActiveRecord::Base
         var = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}
         pp City.find(var)
         sleep(3)
-        binding.pry
-        var = UserTrip.find_and_delete
+        #binding.pry
+        UserTrip.find_and_delete
         #binding.pry
     end
 
