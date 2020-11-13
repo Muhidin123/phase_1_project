@@ -6,9 +6,6 @@ require 'tty'
 class UserTrip < ActiveRecord::Base
     belongs_to :city
     belongs_to :user
-<<<<<<< HEAD
-end 
-=======
 
 
 
@@ -44,4 +41,3 @@ end
 
 
 end
->>>>>>> 8c4167f02c800c8e20e7abf3408d0988d263fe7e
