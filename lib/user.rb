@@ -63,4 +63,17 @@ class User < ActiveRecord::Base
         end
       end
 
+      test = self.all.map do |city|
+        city.name
+        #binding.pry
+    end
+    input = prompt.select("Choose your city", test)
+    pp City.find_by(name: input)
+    #binding.pry
+
+    def self.display_cities_of_user
+      var = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}
+      pp City.find(var)
+    end
+ 
 end

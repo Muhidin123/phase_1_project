@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_11_11_174641) do
 
-  create_table "citys", force: :cascade do |t|
+  create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "state"
     t.integer "population"

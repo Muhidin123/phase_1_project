@@ -31,7 +31,8 @@ class CliCom
     def user_input
         case $answer
         when "All cities"
-            City.display_all_city_names
+            all_cities = City.display_all_city_names
+            binding.pry
         when "Search by city name"
             City.find_by_name
         when "Search by city climate"
@@ -66,5 +67,56 @@ class CliCom
             good_bye
         end
     end
+
+    def self.delete_city
+        # user_city_names = UserTrip.all.select do |trip|
+        #   trip.user_id == current_user.id
+        #   trip.name
+        # end
+
+        this_user_id = User.all.map do |user| 
+            user.user_name
+            user.id
+        end
+        
+        #display all cities
+        #selected city 
+        user_trip= UserTrip.all.select {|trip| trip.user_id == this_user_id}
+        
+        user_city_ids = user_trip.map do |trip|
+            trip.city_id 
+
+        end
+        found_city_ids = City.find(user_city_ids)
+        binding.pry
+      end
+
+        
+
+          #This user's all trip
+      #all the cities
+      #select the city
+      #save this user id
+
+
+      #find the city
+      #go through the joiner
+      #match the user to that city 
+      #save this city id
+      #delete this city
+
+           # def self.new_trip
+      #   city_id = Clicom.user_input.all_cities.map do |city|
+      #     city.id
+      #   end
+          
+      #     User.all.map do |user| 
+      #       if user == self
+      #         urser_id = user.id
+      #         UserTrip.create(user_id: user_id, city_id: city_id)
+      #       end
+      #     end
+
+
 end
 
