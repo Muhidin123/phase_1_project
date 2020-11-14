@@ -49,13 +49,10 @@ class UserTrip < ActiveRecord::Base
     
 
 
-    def self.new_trip
-        UserTrip.create(city_id: City.find_by_name.id, user_id: User.current_user.id)
-        puts "New trip to #{City.display_all_city_names.name} created"
+    def self.new_trip(argument_of_city)
+        UserTrip.create(city_id: argument_of_city.id, user_id: User.current_user.id)
+        puts "New trip to #{argument_of_city.name} created"
         CliCom.menu
     end
-
-
-
 
 end
