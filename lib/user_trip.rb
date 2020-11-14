@@ -12,11 +12,11 @@ class UserTrip < ActiveRecord::Base
 
 
     def self.display_user_cities_as_menu
-        #prompt = TTY:Prompt.new
+        prompt = TTY:Prompt.new
         cities = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}
         cities = City.find(cities).map {|x| x.name}
         @answer_of_user = prompt.select("Choose city name to delete:", cities)
-        #@answer_of_user
+        git @answer_of_user
         #binding.pry
     end
 
@@ -36,8 +36,5 @@ class UserTrip < ActiveRecord::Base
         UserTrip.create(city_id: City.display_all_city_names.id, user_id: User.current_user.id)
         puts "New trip to #{City.display_all_city_names.name} created"
     end
-
-
-
 
 end
