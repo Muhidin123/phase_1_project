@@ -9,3 +9,4 @@ end
 # User.new_trip
 
 CliCom.delete_city
+CliCom.welcome
