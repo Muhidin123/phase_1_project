@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
           password = key(:password).ask("And a new password please: ")
           end
           if User.find_by(user_name: result[:user_name])
-            binding.pry
+            #binding.pry
             puts "Username already taken"
             create_new_user
           else

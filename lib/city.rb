@@ -15,23 +15,29 @@ class City < ActiveRecord::Base
     end
 
     def self.display_all_city_names
-        test = self.all.map do |city|
+        city_names_for_menu = self.all.map do |city|
             city.name
-            #binding.pry
         end
-        input = prompt.select("Choose your city", test)
-        pp City.find_by(name: input)
-        #binding.pry
+        user_city_input = prompt.select("Select your city", city_names_for_menu)
+        pp City.find_by(name: user_city_input)
     end
+
+    ### METHOD TO FIND NAME EVEN IF GIVEN FULL NAME ###
 
     # def self.find_by_name
     #     var = prompt.ask("Search by city name if it's in my database I'll give you info: ")
     #     pp result = City.where('name like?', "%#{var}%")
     # end
 
+    ################################################################
+
+
     def self.find_by_name
-        var = prompt.ask("Search by city name if it's in my database I'll give you info: ")
-        pp result = City.find_by(name: var)
+        user_input_of_city_name= prompt.ask("Search by city name if it's in my database I'll give you info: ")
+        @result = City.find_by(name: user_input_of_city_name)
+        pp @result
+        
+        # CliCom.menu_user_after_picking_city
     end
 
 
@@ -45,12 +51,9 @@ class City < ActiveRecord::Base
     ################ TRY IMPLEMENTING MENU FOR USER TO PICK WHAT CITY TO DELETE###############
 
     def self.display_cities_of_user
-        var = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}
-        pp City.find(var)
+        all_user_cities = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}
+        pp City.find(all_user_cities)
         sleep(3)
-        #binding.pry
-        UserTrip.find_and_delete
-        #binding.pry
     end
 
 
