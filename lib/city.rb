@@ -1,9 +1,12 @@
 require 'pp'
 require 'tty-font'
+<<<<<<< HEAD
 City.connection
 # require_relative 'user.rb'
 # require_relative 'cli_com.rb'
 # require_relative 'user_trip.rb'
+=======
+>>>>>>> f13ed4ae0a827282048b1012632e484af0a0518b
 
 class City < ActiveRecord::Base
     
@@ -20,7 +23,8 @@ class City < ActiveRecord::Base
             city.name
         end
         user_city_input = prompt.select("Select your city", city_names_for_menu)
-        pp City.find_by(name: user_city_input)
+        @displayed_city = City.find_by(name: user_city_input)
+        pp @displayed_city
     end
 
     main_menu = ["Back to main menu", "Save this city to trip history", "EXIT"]
@@ -52,8 +56,6 @@ class City < ActiveRecord::Base
         user_input_of_city_name= prompt.ask("Search by city name if it's in my database I'll give you info: ")
         @result = City.find_by(name: user_input_of_city_name)
         pp @result
-        
-        # CliCom.menu_user_after_picking_city
     end
 
 
@@ -63,8 +65,6 @@ class City < ActiveRecord::Base
         pp City.find_by(average_temp: input)
     end
 
-
-    ################ TRY IMPLEMENTING MENU FOR USER TO PICK WHAT CITY TO DELETE###############
 
     def self.display_cities_of_user
         all_user_cities = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}

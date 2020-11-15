@@ -2,9 +2,6 @@ require_relative '../config/environment'
 
 class CliCom
 
-    def initialize
-    end
-
     def prompt
         prompt = TTY::Prompt.new
     end
@@ -25,15 +22,18 @@ class CliCom
     def self.user_input
         case $user
         when "All cities"
-            all_cities = City.display_all_city_names
+            @city = City.display_all_city_names
+            binding.pry
+            menu_user_after_picking_city(@city)
+
             #binding.pry
         when "Search by city name"
             @city = City.find_by_name
-            menu_user_after_picking_city
-            #binding.pry
+            binding.pry
+            menu_user_after_picking_city(@city)
         when "Search by city climate"
-            #binding.pry
             @city = City.find_by_climate
+            menu_user_after_picking_city(@city)
         when "Check all the cities you have"
             City.display_cities_of_user
             UserTrip.display_user_cities_as_menu
@@ -55,21 +55,19 @@ class CliCom
     #     end
     # end
 
-    def self.menu_user_after_picking_city
+    def self.menu_user_after_picking_city(city_to_save)
         main_menu = ["Back to main menu", "Save this city to trip history", "EXIT"]
         @answer = prompt.select("What would you like to do next", main_menu)
         case @answer
         when "Back to main menu"
             menu
         when "Save this city to trip history"
-            UserTrip.new_trip
-
-        ### NEED TO EXIT BACK TO VIEW OF CITIES 
+            UserTrip.new_trip(city_to_save)
+            #binding.pry
         when "EXIT"
             puts "We are so sorry to see you go :( until next time".red.italic
             exit
         end
-        menu
     end
 
    
