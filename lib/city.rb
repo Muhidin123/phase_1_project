@@ -19,7 +19,7 @@ class City < ActiveRecord::Base
         pp @displayed_city
     end
 
-    ### METHOD TO FIND NAME EVEN IF GIVEN FULL NAME ###
+    ### METHOD TO FIND NAME EVEN IF NOT GIVEN FULL NAME ###
 
     # def self.find_by_name
     #     var = prompt.ask("Search by city name if it's in my database I'll give you info: ")

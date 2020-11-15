@@ -14,6 +14,7 @@ class CliCom
     def self.welcome
         font = TTY::Font.new(:starwars)
         puts font.write("Welcome to this APP", letter_spacing: 1)
+        puts @banner
         sleep(5)
         system 'clear'
         User.setup_user
@@ -28,16 +29,14 @@ class CliCom
         case $user
         when "All cities"
             @city = City.display_all_city_names
-            binding.pry
             menu_user_after_picking_city(@city)
-
-            #binding.pry
         when "Search by city name"
             @city = City.find_by_name
-            binding.pry
             menu_user_after_picking_city(@city)
         when "Search by city climate"
             @city = City.find_by_climate
+            sleep(2)
+
             menu_user_after_picking_city(@city)
         when "Check all the cities you have"
             City.display_cities_of_user
@@ -63,7 +62,6 @@ class CliCom
             menu
         when "Save this city to trip history"
             UserTrip.new_trip(city_to_save)
-            #binding.pry
         when "EXIT"
             puts "We are so sorry to see you go :( until next time".red.italic
             exit
