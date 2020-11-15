@@ -1,5 +1,6 @@
 require 'pp'
 require 'tty-font'
+require 'tty-prompt'
 
 class City < ActiveRecord::Base
     
@@ -11,22 +12,21 @@ class City < ActiveRecord::Base
     end
  
     def self.display_all_city_names
-        binding.pry
+        #binding.pry
         city_names_for_menu = self.all.map do |city|
             city.name
         end
         user_city_input = prompt.select("Select your city", city_names_for_menu)
         @displayed_city = City.find_by(name: user_city_input)
         pp @displayed_city
-    end
 
-    main_menu = ["Back to main menu", "Save this city to trip history", "EXIT"]
+        main_menu = ["Back to main menu", "Save this city to trip history", "EXIT"]
         @answer = prompt.select("What would you like to do next", main_menu)
         case @answer
         when "Back to main menu"
             menu
         when "Save this city to trip history"
-            UserTrip.new_trip
+            UserTrip.new_trip(city_to_save)
 
         ### NEED TO EXIT BACK TO VIEW OF CITIES 
         when "EXIT"
@@ -34,6 +34,7 @@ class City < ActiveRecord::Base
             exit
         end
         menu
+    end
 
     ### METHOD TO FIND NAME EVEN IF GIVEN FULL NAME ###
 

@@ -1,4 +1,6 @@
 require_relative '../config/environment'
+require 'tty-prompt'
+
 
 class CliCom
 
@@ -23,13 +25,9 @@ class CliCom
         case $user
         when "All cities"
             @city = City.display_all_city_names
-            binding.pry
             menu_user_after_picking_city(@city)
-
-            #binding.pry
         when "Search by city name"
             @city = City.find_by_name
-            binding.pry
             menu_user_after_picking_city(@city)
         when "Search by city climate"
             @city = City.find_by_climate
