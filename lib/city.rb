@@ -1,12 +1,5 @@
 require 'pp'
 require 'tty-font'
-<<<<<<< HEAD
-City.connection
-# require_relative 'user.rb'
-# require_relative 'cli_com.rb'
-# require_relative 'user_trip.rb'
-=======
->>>>>>> f13ed4ae0a827282048b1012632e484af0a0518b
 
 class City < ActiveRecord::Base
     
