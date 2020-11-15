@@ -58,8 +58,4 @@ class UserTrip < ActiveRecord::Base
     end
 
 
-    def display_cities_nice
-    end
-
-
 end

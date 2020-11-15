@@ -14,7 +14,6 @@ class CliCom
     def self.welcome
         font = TTY::Font.new(:starwars)
         puts font.write("Welcome to this APP", letter_spacing: 1)
-        puts @banner
         sleep(5)
         system 'clear'
         User.setup_user
