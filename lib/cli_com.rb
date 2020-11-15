@@ -1,9 +1,4 @@
-require "tty-prompt"
-require 'pp'
-require 'colorize'
-require_relative 'city.rb'
-require_relative 'user.rb'
-require_relative 'user_trip.rb'
+require_relative '../config/environment'
 
 class CliCom
 
@@ -15,10 +10,10 @@ class CliCom
     end
     
     def self.welcome
-        #font = TTY::Font.new(:starwars)
-        #puts font.write("Welcome to this APP", letter_spacing: 1)
-        #sleep(5)
-        #system 'clear'
+        font = TTY::Font.new(:starwars)
+        puts font.write("Welcome to this APP", letter_spacing: 1)
+        sleep(5)
+        system 'clear'
         User.setup_user
         sleep(3)
         system 'clear'
@@ -31,7 +26,7 @@ class CliCom
         case $user
         when "All cities"
             all_cities = City.display_all_city_names
-            binding.pry
+            #binding.pry
         when "Search by city name"
             @city = City.find_by_name
             menu_user_after_picking_city
@@ -54,6 +49,11 @@ class CliCom
         user_input
     end
 
+    # def self.return_menu_post_city_selection
+    #     if City.display_all_city_names
+    #      self.menu_user_after_picking_city
+    #     end
+    # end
 
     def self.menu_user_after_picking_city
         main_menu = ["Back to main menu", "Save this city to trip history", "EXIT"]
@@ -63,6 +63,8 @@ class CliCom
             menu
         when "Save this city to trip history"
             UserTrip.new_trip
+
+        ### NEED TO EXIT BACK TO VIEW OF CITIES 
         when "EXIT"
             puts "We are so sorry to see you go :( until next time".red.italic
             exit
@@ -70,26 +72,7 @@ class CliCom
         menu
     end
 
-    def self.delete_city
-        # user_city_names = UserTrip.all.select do |trip|
-        #   trip.user_id == current_user.id
-        #   trip.name
-        # end
+   
 
-        this_user_id = User.all.map do |user| 
-            user.user_name
-            user.id
-        end
-        
-        #display all cities
-        #selected city 
-        user_trip= UserTrip.all.select {|trip| trip.user_id == this_user_id}
-        
-        user_city_ids = user_trip.map do |trip|
-            trip.city_id 
-        end
-
-        found_city_ids = City.find(user_city_ids)
-        binding.pry
-    end
+    
 end

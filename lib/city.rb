@@ -1,6 +1,6 @@
 require 'pp'
 require 'tty-font'
-
+City.connection
 # require_relative 'user.rb'
 # require_relative 'cli_com.rb'
 # require_relative 'user_trip.rb'
@@ -15,12 +15,28 @@ class City < ActiveRecord::Base
     end
  
     def self.display_all_city_names
+        binding.pry
         city_names_for_menu = self.all.map do |city|
             city.name
         end
         user_city_input = prompt.select("Select your city", city_names_for_menu)
         pp City.find_by(name: user_city_input)
     end
+
+    main_menu = ["Back to main menu", "Save this city to trip history", "EXIT"]
+        @answer = prompt.select("What would you like to do next", main_menu)
+        case @answer
+        when "Back to main menu"
+            menu
+        when "Save this city to trip history"
+            UserTrip.new_trip
+
+        ### NEED TO EXIT BACK TO VIEW OF CITIES 
+        when "EXIT"
+            puts "We are so sorry to see you go :( until next time".red.italic
+            exit
+        end
+        menu
 
     ### METHOD TO FIND NAME EVEN IF GIVEN FULL NAME ###
 
@@ -43,7 +59,7 @@ class City < ActiveRecord::Base
 
 
     def self.find_by_climate
-        input = prompt.select("Enter avg temp u want:", %w(60F 65F))
+        input = prompt.select("Enter avg temp u want:", %w(60F 65F 75F 79F 84F))
         pp City.find_by(average_temp: input)
     end
 

@@ -28,6 +28,7 @@ class UserTrip < ActiveRecord::Base
             elsif @answer_of_user == questions[1]
                 @answer_of_user = prompt.select("What city do you want to delete", user_cities_to_display)
                 find_and_delete
+                ### NEED TO GO BACK TO MAIN MENU OR EXIT
             else
                 puts "Good bye"
                 exit
@@ -45,6 +46,13 @@ class UserTrip < ActiveRecord::Base
         sleep(2)
         system "clear"
         CliCom.menu
+    end
+
+    def self.return_to_menu
+        #display_user_cities_as_menu @answer_of_user == questions[1]
+        if find_and_delete
+            display_user_cities_as_menu
+        end
     end
     
 

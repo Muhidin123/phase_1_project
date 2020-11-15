@@ -36,6 +36,7 @@ GEM
     pastel (0.7.2)
       equatable (~> 0.5.0)
       tty-color (~> 0.4.0)
+    pp (0.1.0)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -128,6 +129,7 @@ PLATFORMS
 
 DEPENDENCIES
   colorize
+  pp
   pry
   require_all
   rest-client
@@ -135,6 +137,7 @@ DEPENDENCIES
   sqlite3
   tty
   tty-font
+  tty-prompt
 
 BUNDLED WITH
    2.1.4

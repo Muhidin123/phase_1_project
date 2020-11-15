@@ -8,3 +8,5 @@ gem "rest-client"
 gem 'tty'
 gem 'colorize'
 gem 'tty-font'
+gem 'tty-prompt'
+gem 'pp'
