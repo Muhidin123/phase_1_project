@@ -16,32 +16,48 @@ class City < ActiveRecord::Base
             city.name
         end
         user_city_input = prompt.select("Select your city", city_names_for_menu)
-        @displayed_city = City.find_by(name: user_city_input)
-        pp @displayed_city
+        displayed_city = City.find_by(name: user_city_input)
+        cities(displayed_city)
+        displayed_city
     end
 
 
     def self.find_by_name
         user_input_of_city_name= prompt.ask("Search by city name if it's in my database I'll give you info: ")
         @result = City.find_by(name: user_input_of_city_name)
-        pp @result
+        cities(@result)
+        @result
     end
 
 
 
     def self.find_by_climate
-        input = prompt.select("Enter average temperature you want:", %w(59F 60F 63F 65F 66F 68F 69F 72F 75F 77F))
-        pp City.find_by(average_temp: input)
+        input = prompt.select("Enter avg temp u want:", %w(59F 60F 63F 65F 66F 68F 69F 72F 75F 77F))
+        @input_user = City.find_by(average_temp: input)
+        cities(@input_user)
+        @input_user
     end
 
 
     def self.display_cities_of_user
         all_user_cities = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}
-        all_found_cities = City.find(all_user_cities)
-        pp all_found_cities.sort
+        user_cities = City.find(all_user_cities)
+        user_cities.each {|x| cities(x)}
         sleep(3)
-        system "clear"
+        user_cities
     end
 
+    def self.cities(city)
+        puts "Name: #{city.name}\n"
+        puts "State: #{city.state}\n"
+        puts "Population: #{city.population}\n"
+        puts "Area: #{city.area}\n"
+        puts "Average temperature: #{city.average_temp}\n"
+        puts "What to eat and drink: #{city.eat_drink}\n"
+        puts "Visit this restaurant: #{city.restaurant}\n"
+        puts "Landmarks: #{city.landmark}\n"
+        puts "Activites: #{city.activity}\n"
+        puts "-------------------------------------"
+    end
 
 end
