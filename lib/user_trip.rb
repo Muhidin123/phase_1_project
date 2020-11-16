@@ -47,7 +47,7 @@ class UserTrip < ActiveRecord::Base
 
 
     def self.new_trip(argument_of_city)
-        UserTrip.create(city_id: argument_of_city, user_id: User.current_user.id)
+        UserTrip.create(city_id: argument_of_city.id, user_id: User.current_user.id)
         puts "New trip to #{argument_of_city.name} created"
         sleep(3)
         system "clear"
