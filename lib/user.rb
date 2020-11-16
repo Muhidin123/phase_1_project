@@ -9,11 +9,14 @@ class User < ActiveRecord::Base
         system "clear"
         prompt = TTY::Prompt.new
         user_input = prompt.select("What's your status?",
-          %w(New_User Existing_User))
+          %w(New_User Existing_User Exit))
         if user_input == "New_User"
           self.create_new_user
-        else
+        elsif user_input == "Existing_User"
           self.find_existing_user
+        else user_input == "Exit"
+          puts "Thank you for using our app"
+          exit
         end
       end
 

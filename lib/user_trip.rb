@@ -9,9 +9,6 @@ class UserTrip < ActiveRecord::Base
     belongs_to :user
 
 
-
-
-
     def self.display_user_cities_as_menu
         cities = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}
         if cities.length == 0
@@ -42,8 +39,9 @@ class UserTrip < ActiveRecord::Base
         user_id = User.current_user.id
         trip = UserTrip.find_by(city_id: city_id, user_id: user_id)
         trip.delete
+        system "clear"
         puts "DELETED #{City.find_by(name: @answer_of_user).name}".red.underline
-        sleep(2)
+        sleep(5)
         system "clear"
         CliCom.menu
     end
@@ -60,7 +58,10 @@ class UserTrip < ActiveRecord::Base
     def self.new_trip(argument_of_city)
         UserTrip.create(city_id: argument_of_city.id, user_id: User.current_user.id)
         puts "New trip to #{argument_of_city.name} created"
+        sleep(3)
+        system "clear"
         CliCom.menu
     end
+
 
 end
