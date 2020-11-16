@@ -12,7 +12,7 @@ class City < ActiveRecord::Base
     end
  
     def self.display_all_city_names
-        city_names_for_menu = self.all.map do |city|
+        city_names_for_menu = self.all.order(:name).map do |city|
             city.name
         end
         user_city_input = prompt.select("Select your city", city_names_for_menu)
@@ -30,14 +30,15 @@ class City < ActiveRecord::Base
 
 
     def self.find_by_climate
-        input = prompt.select("Enter average temperature you want:", %w(60F 65F 63F 69F 75F))
+        input = prompt.select("Enter average temperature you want:", %w(59F 60F 63F 65F 66F 68F 69F 72F 75F 77F))
         pp City.find_by(average_temp: input)
     end
 
 
     def self.display_cities_of_user
         all_user_cities = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}
-        pp City.find(all_user_cities)
+        all_found_cities = City.find(all_user_cities)
+        pp all_found_cities.sort
         sleep(3)
         system "clear"
     end
