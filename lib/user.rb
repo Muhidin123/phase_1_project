@@ -30,7 +30,6 @@ class User < ActiveRecord::Base
           password = key(:password).ask("And a new password please: ")
           end
           if User.find_by(user_name: result[:user_name])
-            #binding.pry
             puts "Username already taken"
             create_new_user
           else
@@ -62,19 +61,4 @@ class User < ActiveRecord::Base
           $new_user
         end
       end
-
-      test = self.all.map do |city|
-        city.name
-        #binding.pry
-    end
-    # prompt = TTY::Prompt.new
-    # input = prompt.select("Choose your city", test)
-    # pp City.find_by(name: input)
-    # #binding.pry
-
-    def self.display_cities_of_user
-      var = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}
-      pp City.find(var)
-    end
- 
 end

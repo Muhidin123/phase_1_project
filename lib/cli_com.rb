@@ -1,6 +1,9 @@
-require_relative '../config/environment'
+require 'pp'
 require 'tty-prompt'
-
+require 'colorize'
+require_relative 'city.rb'
+require_relative 'user.rb'
+require_relative 'user_trip.rb'
 
 class CliCom
 
@@ -25,6 +28,7 @@ class CliCom
         case $user
         when "All cities"
             @city = City.display_all_city_names
+            binding.pry
             menu_user_after_picking_city(@city)
         when "Search by city name"
             @city = City.find_by_name
@@ -32,7 +36,6 @@ class CliCom
         when "Search by city climate"
             @city = City.find_by_climate
             sleep(2)
-
             menu_user_after_picking_city(@city)
         when "Check all the cities you have"
             City.display_cities_of_user
@@ -49,12 +52,6 @@ class CliCom
         user_input
     end
 
-    # def self.return_menu_post_city_selection
-    #     if City.display_all_city_names
-    #      self.menu_user_after_picking_city
-    #     end
-    # end
-
     def self.menu_user_after_picking_city(city_to_save)
         main_menu = ["Back to main menu", "Save this city to trip history", "EXIT"]
         @answer = prompt.select("What would you like to do next?", main_menu)
@@ -68,8 +65,4 @@ class CliCom
             exit
         end
     end
-
-   
-
-    
 end

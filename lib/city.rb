@@ -12,14 +12,12 @@ class City < ActiveRecord::Base
     end
  
     def self.display_all_city_names
-        #binding.pry
         city_names_for_menu = self.all.map do |city|
             city.name
         end
         user_city_input = prompt.select("Select your city", city_names_for_menu)
         @displayed_city = City.find_by(name: user_city_input)
         pp @displayed_city
-        sleep(3)
     end
 
 
@@ -27,7 +25,6 @@ class City < ActiveRecord::Base
         user_input_of_city_name= prompt.ask("Search by city name if it's in my database I'll give you info: ")
         @result = City.find_by(name: user_input_of_city_name)
         pp @result
-        sleep(3)
     end
 
 
@@ -35,7 +32,6 @@ class City < ActiveRecord::Base
     def self.find_by_climate
         input = prompt.select("Enter average temperature you want:", %w(60F 65F 63F 69F 75F))
         pp City.find_by(average_temp: input)
-        sleep(3)
     end
 
 
