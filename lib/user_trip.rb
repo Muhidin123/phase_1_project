@@ -59,6 +59,7 @@ class UserTrip < ActiveRecord::Base
             sleep(3)
             CliCom.menu
         end
+
     end
 
 
