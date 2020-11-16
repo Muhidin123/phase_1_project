@@ -12,10 +12,10 @@ class CliCom
     end
     
     def self.welcome
-        font = TTY::Font.new(:starwars)
-        puts font.write("Welcome to this APP", letter_spacing: 1)
-        sleep(5)
-        system 'clear'
+        #font = TTY::Font.new(:starwars)
+        #puts font.write("Welcome to this APP", letter_spacing: 1)
+        #sleep(5)
+        #system 'clear'
         User.setup_user
         sleep(3)
         system 'clear'

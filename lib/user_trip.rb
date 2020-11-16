@@ -51,10 +51,17 @@ class UserTrip < ActiveRecord::Base
 
 
     def self.new_trip(argument_of_city)
-        UserTrip.create(city_id: argument_of_city.id, user_id: User.current_user.id)
-        puts "New trip to #{argument_of_city.name} created"
-        sleep(3)
-        CliCom.menu
+        user_trip = UserTrip.find_by(city_id: argument_of_city.id, user_id: User.current_user.id)
+        if UserTrip.all.include?(user_trip)
+            puts "You already have this trip saved"
+            sleep(3)
+            CliCom.menu
+        else
+            UserTrip.create(city_id: argument_of_city.id, user_id: User.current_user.id)
+            puts "New trip to #{argument_of_city.name} created"
+            sleep(3)
+            CliCom.menu
+        end
     end
 
 
