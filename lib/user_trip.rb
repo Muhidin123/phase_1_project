@@ -9,9 +9,6 @@ class UserTrip < ActiveRecord::Base
     belongs_to :user
 
 
-
-
-
     def self.display_user_cities_as_menu
         cities = UserTrip.all.select {|trips| trips.user_id == User.current_user.id}.map {|cities| cities.city_id}
         if cities.length == 0

@@ -20,15 +20,6 @@ class City < ActiveRecord::Base
         displayed_city
     end
 
-    ### METHOD TO FIND NAME EVEN IF NOT GIVEN FULL NAME ###
-
-    # def self.find_by_name
-    #     var = prompt.ask("Search by city name if it's in my database I'll give you info: ")
-    #     pp result = City.where('name like?', "%#{var}%")
-    # end
-
-    ################################################################
-
 
     def self.find_by_name
         user_input_of_city_name= prompt.ask("Search by city name if it's in my database I'll give you info: ")
